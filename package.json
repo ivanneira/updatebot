@@ -1,0 +1,15 @@
+{
+  "name": "updatebpt",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No hay test\" && exit 1"
+  },
+  "author": "ivanneira",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "node-telegram-bot-api": "^0.50.0"
+  }
+}
