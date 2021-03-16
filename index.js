@@ -63,7 +63,7 @@ bot.on('message', (msg) => {
 
 bot.on('callback_query', function onCallbackQuery( callbackQuery ) {
 
-        bot.editMessageText("comando enviado", {"chat_id": callbackQuery.message.chat.id, "message_id": callbackQuery.message.message_id});
+        bot.editMessageText("<!> ejecutando la órden", {"chat_id": callbackQuery.message.chat.id, "message_id": callbackQuery.message.message_id});
 
         update( callbackQuery.data );
 
@@ -114,13 +114,18 @@ function updatePhp( appIndex ){
                 send2log(`child process exited with code ${code} `);
 
                 bot.sendMessage(chat_id,`child process exited with code ${code}`);
+
+                bot.sendMessage("<!> finalizado");
         });
 }
 
 function updateNpm(appIndex){
 
+        bot.sendMessage(chat_id, "<!> git pull enviado");
+        send2log('git pull -> ' + apps[appIndex].nombre);
+
         let pull = spawn("git", ["-C", apps[appIndex].ruta, "pull", "https://"+ gitlabUser +":"+ gitlabPass + "@" + apps[appIndex].url] );
-        console.log(1)
+
         pull.stdout.on("data", data => {
 
                 console.log(`stdout: ${data}`);
@@ -136,7 +141,7 @@ function updateNpm(appIndex){
                 send2log(`stderr: ${error} `);
                 bot.sendMessage(chat_id,`${error}`);
 
-                bot.sendMessage("se canceló la actualización");
+                bot.sendMessage("[X] se canceló la actualización");
 
                 return;
         });
@@ -148,7 +153,7 @@ function updateNpm(appIndex){
                 bot.sendMessage(chat_id,`child process exited with code ${code}`);
 
 
-                bot.sendMessage(chat_id, "npm install enviado");
+                bot.sendMessage(chat_id, "<!> npm install enviado");
                 send2log('npm i -> ' + apps[appIndex].nombre);
 
                 let npmi = spawn( "npm", ['i', '--prefix', apps[appIndex].ruta] );
@@ -176,9 +181,9 @@ function updateNpm(appIndex){
                         log_file.write(`child process exited with code ${code} \n`);
                         bot.sendMessage(chat_id,`child process exited with code ${code}`);
 
-                        bot.sendMessage(chat_id, "npm run build enviado");
+                        bot.sendMessage(chat_id, "<!> npm run build enviado");
 
-                	log_file.write('[!] build APP Salud \n');
+                	log_file.write('build -> \n' + apps[appIndex].nombre);
 
         	        let npmbuild = spawn("npm", ['run','build', '--prefix', apps[appIndex].ruta]);
 
@@ -205,6 +210,8 @@ function updateNpm(appIndex){
                 	        log_file.write(`child process exited with code ${code} \n`);
 
         	                bot.sendMessage(chat_id,`child process exited with code ${code}`);
+
+                                bot.sendMessage("<!> finalizado");
 	                });
                 });
 
