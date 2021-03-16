@@ -116,8 +116,10 @@ function updatePhp( appIndex ){
 
 function updateNpm(appIndex){
 
-        let pull = spawn("git", ["-C", app[appIndex].ruta, "pull", "https://"+ gitlabUser +":"+ gitlabPass + "@" + apps[appIndex].url]);
+        console.log(1)
 
+        let pull = spawn("git", ["-C", app[appIndex].ruta, "pull", "https://"+ gitlabUser +":"+ gitlabPass + "@" + apps[appIndex].url] );
+        console.log(2)
         pull.stdout.on("data", data => {
 
                 console.log(`stdout: ${data}`);
