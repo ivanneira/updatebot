@@ -1,0 +1,66 @@
+/*
+
+Éste es el archivo de configuración.
+antes de comenzar debe configurar:
+token
+usuarios permitidos
+user y pass de gitlab
+aplicaciones
+
+*/
+
+// token del bot
+
+const telegramToken = <YOUTELEGRAMTOKENHERE>;
+
+// usuario y contraseña de gitlab
+
+const _gitlabUser = <GITLABUSER>;
+const _gitlabPass = <GITLABPASS>;
+
+// usuarios autorizados, se agregan por id de telegram
+
+const users_authorized = [
+    <TELEGRAMID1>,
+    <TELEGRAMID2>
+  
+    ]
+
+//aplicaciones disponibles
+// nombre: título descriptivo
+// url: dirección de gitlab sin http
+// ruta: directorio del proyecto
+// update: forma de actualizarse. "npm" o "php"
+// activo: activar o desactivar como opción
+
+/* EJEMPLO:
+var all_apps = [
+    {
+        "nombre": "nombre app php",
+        "url": "gitlab.com/nombre/app",
+        "ruta": "/var/www/nombreapp",
+        "update": "php",
+        "activo": true
+    },
+    {
+        "nombre": "nombre app node",
+        "url": "gitlab.com/nombre/appennode",
+        "ruta": "var/www/sistemaennode",
+        "update": "npm",
+        "activo": true
+    },
+    {
+        "nombre": "app sin actualizacion",
+        "url": "gitlab.com/esta/noseactualiza",
+        "ruta": "/var/www/porqueestáenfalse",
+        "update": "npm",
+        "activo": false
+    }
+];
+*/
+
+module.exports.token = telegramToken;
+module.exports.gitlabUser = _gitlabUser;
+module.exports.gitlabPass = _gitlabPass;
+module.exports.apps = all_apps;
+module.exports.authorized = users_authorized;
