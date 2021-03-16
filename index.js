@@ -27,7 +27,7 @@ let keyboard = [];
 for( let i = 0 ; i < apps.length ; i++ ){
 
         if(apps[i].activo)
-                keyboard.push( { "text": apps[i].nombre , "callback_data": i } );
+                keyboard.push( [{ "text": apps[i].nombre , "callback_data": i }] );
 }
 
 // datos del mensaje
