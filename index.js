@@ -117,7 +117,7 @@ function updatePhp( appIndex ){
 function updateNpm(appIndex){
 
         let pull = spawn("git", ["-C", apps[appIndex].ruta, "pull", "https://"+ gitlabUser +":"+ gitlabPass + "@" + apps[appIndex].url] );
-
+        console.log(1)
         pull.stdout.on("data", data => {
 
                 console.log(`stdout: ${data}`);
@@ -177,7 +177,7 @@ function updateNpm(appIndex){
 
                 	log_file.write('[!] build APP Salud \n');
 
-        	        let npmbuild = spawn("npm", ['run','build', '--prefix', rutaAppSalud]);
+        	        let npmbuild = spawn("npm", ['run','build', '--prefix', apps[appIndex].ruta]);
 
 	                npmbuild.stdout.on("data", data => {
 
