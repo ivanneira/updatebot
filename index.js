@@ -49,7 +49,7 @@ bot.on('message', (msg) => {
 
                 if( /^t/i.test(from_txt) ){
 
-                        sendToDash(from_txt.substring(1));
+                        send2Dash(from_txt.substring(1));
                 }
 
                 if( /^pull/i.test(from_txt) ){
@@ -223,13 +223,8 @@ function updateNpm(appIndex){
 
 }
 
-function sendToDash( message ){
+function send2Dash( message ){
 
-        console.log( message );
-
-        var data = JSON.stringify( {"message": "cosasssss"} );
-
-        
 
         var config = {
                 method: 'post',
@@ -238,17 +233,16 @@ function sendToDash( message ){
                   'Content-Type': 'application/json',
                   'Authorization': config.apitoken,
                 },
-                data : "data"
+                data : {"message": message}
         };
 
         axios(config)
         .then(function (response) {
-                console.log(1)
+
           console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
-                console.log(2)
+
           console.log(error);
         });
-        console.log(3)
 }
