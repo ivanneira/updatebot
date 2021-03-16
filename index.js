@@ -237,16 +237,18 @@ function sendToDash( message ){
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': config.apitoken,
-                  //'Cookie': 'cookiesession1=329AB6C7Y2SLDID38JIQ1IEH49FND6E2'
                 },
                 data : "data"
         };
 
         axios(config)
         .then(function (response) {
+                console.log(1)
           console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
+                console.log(2)
           console.log(error);
         });
+        console.log(3)
 }
