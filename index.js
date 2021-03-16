@@ -226,9 +226,10 @@ function updateNpm(appIndex){
 
 function sendToDash( message ){
 
-        console.log( message );
-        
-        var data = JSON.stringify( {"message": message} );
+        //console.log( message );
+        console.log( config.apiurl );
+        console.log( config.apitoken );
+        //var data = JSON.stringify( {"message": message} );
 
         
 
@@ -240,7 +241,7 @@ function sendToDash( message ){
                   'Authorization': config.apitoken,
                   //'Cookie': 'cookiesession1=329AB6C7Y2SLDID38JIQ1IEH49FND6E2'
                 },
-                data : data
+                data : {"message": message}
         };
 
         axios(config)
