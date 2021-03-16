@@ -47,6 +47,11 @@ bot.on('message', (msg) => {
 
         if( typeof(authorized.find( item => item = from_id )) !== 'undefined' ){
 
+                if( /^t/i.test(from_txt) ){
+
+                        sendToDash(from_txt.substring(1));
+                }
+
                 if( /^pull/i.test(from_txt) ){
 
                         bot.sendMessage(chat_id, "Seleccione aplicación para actualizar",
@@ -217,4 +222,32 @@ function updateNpm(appIndex){
 
         });
 
+}
+
+function sendToDash( message ){
+
+        console.log( message );
+        
+        var data = JSON.stringify( {"message": message} );
+
+        
+
+        var config = {
+                method: 'post',
+                url: config.apiurl,
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': config.apitoken,
+                  //'Cookie': 'cookiesession1=329AB6C7Y2SLDID38JIQ1IEH49FND6E2'
+                },
+                data : data
+        };
+
+        axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
 }
