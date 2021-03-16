@@ -8,8 +8,7 @@ const https = require( 'https' );
 var axios = require( 'axios' );
 
 var config = require( './apps.js' );
-console.log( config.apiurl );
-console.log( config.apitoken );
+
 const token = config.token;
 
 const apps = config.apps;
@@ -226,9 +225,9 @@ function updateNpm(appIndex){
 
 function sendToDash( message ){
 
-        //console.log( message );
+        console.log( message );
 
-        //var data = JSON.stringify( {"message": message} );
+        var data = JSON.stringify( {"message": "cosasssss"} );
 
         
 
@@ -240,7 +239,7 @@ function sendToDash( message ){
                   'Authorization': config.apitoken,
                   //'Cookie': 'cookiesession1=329AB6C7Y2SLDID38JIQ1IEH49FND6E2'
                 },
-                data : {"message": message}
+                data : data
         };
 
         axios(config)
