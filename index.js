@@ -239,7 +239,7 @@ function sendToDash( message ){
                   'Authorization': config.apitoken,
                   //'Cookie': 'cookiesession1=329AB6C7Y2SLDID38JIQ1IEH49FND6E2'
                 },
-                data : data
+                data : "data"
         };
 
         axios(config)
