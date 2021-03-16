@@ -8,7 +8,8 @@ const https = require( 'https' );
 var axios = require( 'axios' );
 
 var config = require( './apps.js' );
-
+console.log( config.apiurl );
+console.log( config.apitoken );
 const token = config.token;
 
 const apps = config.apps;
@@ -137,7 +138,6 @@ function updateNpm(appIndex){
                 send2log(`stdout: ${data} `);
                 
                 bot.sendMessage(chat_id, `${data}`);
-
         });
 
         pull.on('error', (error) => {
@@ -227,8 +227,7 @@ function updateNpm(appIndex){
 function sendToDash( message ){
 
         //console.log( message );
-        console.log( config.apiurl );
-        console.log( config.apitoken );
+
         //var data = JSON.stringify( {"message": message} );
 
         
