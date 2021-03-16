@@ -63,7 +63,7 @@ bot.on('message', (msg) => {
 
 bot.on('callback_query', function onCallbackQuery( callbackQuery ) {
 
-        bot.editMessageText("comando enviado", {"chat_id": chat_id, "message_id": msg_id});
+        bot.editMessageText("comando enviado", {"chat_id": callbackQuery.message.chat.id, "message_id": callbackQuery.message.message_id});
 
         update( callbackQuery.data );
 
