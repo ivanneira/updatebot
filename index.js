@@ -43,6 +43,7 @@ bot.on('message', (msg) => {
         from_id = msg.from.id;
         from_txt = msg.text;
         chat_id = msg.chat.id;
+        msg_id = msg.message_id
 
         if( typeof(authorized.find( item => item = from_id )) !== 'undefined' ){
 
@@ -61,6 +62,8 @@ bot.on('message', (msg) => {
 });
 
 bot.on('callback_query', function onCallbackQuery( callbackQuery ) {
+
+        bot.editMessageText("comando enviado", {"chat_id": chat_id, "message_id": msg_id});
 
         update( callbackQuery.data );
 
@@ -131,7 +134,7 @@ function updateNpm(appIndex){
 
                 console.log(`stderr: ${error}`);
                 send2log(`stderr: ${error} `);
-                bot.sendMessage(chat_id,`${error}`);+
+                bot.sendMessage(chat_id,`${error}`);
 
                 bot.sendMessage("se canceló la actualización");
 
