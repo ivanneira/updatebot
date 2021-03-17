@@ -9,7 +9,6 @@ var util = require( 'util' );
 var log_file = fs.createWriteStream( /*__dirname +*/ '/var/log/updateBOT.log', {flags : 'w'} );
 var log_stdout = process.stdout;
 
-
 const token = config.token;
 
 const apps = config.apps;
@@ -50,7 +49,6 @@ bot.on('message', (msg) => {
 
                 if( /^t/i.test(from_txt) ){
 
-                        console.log(from_txt.substring(1))
                         send2Dash(from_txt.substring(1));
                 }
 
@@ -222,13 +220,11 @@ function updateNpm(appIndex){
                                 bot.sendMessage("<!> finalizado");
 	                });
                 });
-
         });
-
 }
 
 function send2Dash( message ){
-
+        console.log(11111111)
         console.log(message,config.apiurl,config.apitoken )
 
         var config = {
