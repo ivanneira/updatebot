@@ -257,11 +257,9 @@ function send2Dash( message ){
 
 function autoupdate(){
 
-        console.log("DIRNAME_>_>_>_>"+__dirname);
-
         bot.sendMessage(chat_id,"<!> Autoactualizándome! ");
         bot.sendPhoto(chat_id, __dirname + "RoboCop_dismemberd.jpg");
-        
+
         send2log( Date.now() + " - " + from_name + " -> AUTOUPDATE");
 
         let pull = spawn( "git", ["pull"] );
