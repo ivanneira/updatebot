@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
+    "nedb": "^1.8.0",
     "node-telegram-bot-api": "^0.50.0"
   }
 }

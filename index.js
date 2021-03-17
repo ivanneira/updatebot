@@ -1,6 +1,8 @@
 const TelegramBot = require( 'node-telegram-bot-api' );
 var spawn = require( 'child_process' ).spawn;
 var axios = require( 'axios' );
+var Datastore = require('nedb')
+  , db = new Datastore({ filename: __dirname + '/nedbFile', autoload: true });
 
 var config = require( './apps.js' );
 
