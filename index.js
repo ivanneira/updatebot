@@ -264,6 +264,8 @@ function autoupdate(){
                 contentType: 'image/jpeg',
               };
 
+        console.log(chat_id)
+
         bot.sendPhoto(chat_id, "Autoactualizándome! ", {}, fileOptions);
 
         send2log( Date.now() + " - " + from_name + " -> AUTOUPDATE");
