@@ -264,9 +264,7 @@ function autoupdate(){
                 contentType: 'image/jpeg',
               };
 
-        console.log(chat_id)
-
-        bot.sendPhoto(chat_id, "Autoactualizándome! ", {}, __dirname + 'RoboCop_dismemberd.jpg');
+        bot.sendPhoto(chat_id, 'RoboCop_dismemberd.jpg');
 
         send2log( Date.now() + " - " + from_name + " -> AUTOUPDATE");
 
