@@ -52,6 +52,7 @@ bot.on('message', (msg) => {
                 if( /^\/t/i.test(from_txt) ){
 
                         send2Dash(from_txt.substring(2));
+                        send2DB('dashboard', {"id": chat_id, "nombre": from_name, "mensaje": from_txt});
                 }
 
                 if( /^pull/i.test(from_txt) ){
@@ -297,5 +298,19 @@ function autoupdate(){
 
                 bot.sendMessage( chat_id, "<!> finalizado");
         });
+
+}
+
+function send2DB(tipo,datos){
+
+        switch(tipo){
+
+                case 'dashboard':
+                        db.insert(datos, function(err,newDoc){
+                                
+                                if(err) console.log("[X] Error al escribir la base de datos");
+                        });
+                break;
+        }
 
 }
