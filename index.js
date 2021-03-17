@@ -62,7 +62,7 @@ bot.on('message', (msg) => {
                         });
                 }
 
-                if( /^autoupdate, please/i.test(from_txt) ){
+                if( /^autoupdate/i.test(from_txt) ){
 
                         autoupdate();
                 }
