@@ -47,9 +47,9 @@ bot.on('message', (msg) => {
 
         if( typeof(authorized.find( item => item = from_id )) !== 'undefined' ){
 
-                if( /^t/i.test(from_txt) ){
+                if( /^/t/i.test(from_txt) ){
 
-                        send2Dash(from_txt.substring(1));
+                        send2Dash(from_txt.substring(2));
                 }
 
                 if( /^pull/i.test(from_txt) ){
@@ -62,7 +62,7 @@ bot.on('message', (msg) => {
                         });
                 }
 
-                if( /^autoupdate/i.test(from_txt) ){
+                if( /^autoupdateplease/i.test(from_txt) ){
 
                         autoupdate();
                 }
