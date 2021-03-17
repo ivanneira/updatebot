@@ -257,14 +257,12 @@ function send2Dash( message ){
 
 function autoupdate(){
 
-        //bot.sendMessage(chat_id,"<!> Autoactualizándome! ");
-
         const fileOptions = {
                 filename: 'RoboCop_dismemberd.jpg',
                 contentType: 'image/jpeg',
               };
 
-        bot.sendPhoto(chat_id, 'RoboCop_dismemberd.jpg');
+        bot.sendPhoto(chat_id, "<!> Autoactualizándome! ", 'RoboCop_dismemberd.jpg');
 
         send2log( Date.now() + " - " + from_name + " -> AUTOUPDATE");
 
