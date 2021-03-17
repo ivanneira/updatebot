@@ -260,11 +260,11 @@ function autoupdate(){
         //bot.sendMessage(chat_id,"<!> Autoactualizándome! ");
 
         const fileOptions = {
-                filename: __dirname + 'RoboCop_dismemberd.jpg',
+                filename: 'RoboCop_dismemberd.jpg',
                 contentType: 'image/jpeg',
               };
 
-        bot.sendPhoto(chat_id, "Autoactualizándome! ", {}, "https://www.google.com/url?sa=i&url=https%3A%2F%2Frobocop.fandom.com%2Fwiki%2FRoboCop&psig=AOvVaw0pIxMeFFbCTmy-DfjFdnqu&ust=1616071924076000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCODpg6Svt-8CFQAAAAAdAAAAABAD");
+        bot.sendPhoto(chat_id, "Autoactualizándome! ", {}, fileOptions);
 
         send2log( Date.now() + " - " + from_name + " -> AUTOUPDATE");
 
