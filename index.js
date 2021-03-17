@@ -228,6 +228,8 @@ function updateNpm(appIndex){
 
 function send2Dash( message ){
 
+        console.log(message,config.apiurl,config.apitoken )
+
         var config = {
                 method: 'post',
                 url: config.apiurl,
