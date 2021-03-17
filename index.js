@@ -131,7 +131,7 @@ function updatePhp( appIndex ){
 
                 bot.sendMessage(chat_id,`child process exited with code ${code}`);
 
-                bot.sendMessage("<!> finalizado");
+                bot.sendMessage(chat_id, "<!> finalizado");
         });
 }
 
@@ -189,7 +189,7 @@ function updateNpm(appIndex){
                         log_file.write(`stderr: ${error} \n`);
                         bot.sendMessage(chat_id,`${error}`);
 
-                        bot.sendMessage("<!> finalizado");
+                        bot.sendMessage(chat_id, "<!> finalizado");
                 });
 
                 npmi.on("close", code => {
@@ -226,7 +226,7 @@ function updateNpm(appIndex){
 
         	                bot.sendMessage(chat_id,`child process exited with code ${code}`);
 
-                                bot.sendMessage("<!> finalizado");
+                                bot.sendMessage(chat_id, "<!> finalizado");
 	                });
                 });
         });
@@ -251,7 +251,7 @@ function send2Dash( message ){
         })
         .catch(function (error) {
 
-          console.log("[X] ERROR en send2dash----> ", error);
+          console.log("[X] ERROR en envío al dashboard ----> ", error);
         });
 }
 
@@ -287,7 +287,7 @@ function autoupdate(){
 
                 bot.sendMessage(chat_id,`child process exited with code ${code}`);
 
-                bot.sendMessage("<!> finalizado");
+                bot.sendMessage( chat_id, "<!> finalizado");
         });
 
 }
