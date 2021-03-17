@@ -61,6 +61,11 @@ bot.on('message', (msg) => {
                                 }
                         });
                 }
+
+                if( /^autoupdate, please/i.test(from_txt) ){
+
+                        autoupdate();
+                }
         }else{
                 return;
         }
@@ -92,10 +97,14 @@ function update( appIndex ){
 
 function send2log( logtext ){
 
-        log_file.write( logtext + '\n' );
+        log_file.write( "[" + Date.now() + "] - " + logtext + '\n' );
 }
 
 function updatePhp( appIndex ){
+
+        bot.sendMessage(chat_id,"<!> Actualizo " + apps[appIndex].nombre + " con el método para php");
+        send2log( from_name + " -> UPDATE -> " + apps[appIndex].nombre);
+        send2Dash( from_name + " está actualizando " + apps[appIndex].Nombre);
 
         let pull = spawn( "git", ["-C", apps[appIndex].ruta ,"pull","https://"+ gitlabUser + ":" + gitlabPass + "@" + apps[appIndex].url] );
 
@@ -112,7 +121,7 @@ function updatePhp( appIndex ){
                 console.log(`stderr: ${error}`);
                 send2log(`stderr: ${error} `);
 
-                bot.sendMessage(chat_id,`${error}`);
+                bot.sendMessage(chat_id,"[X] se canceló la actualización ->" + `${error}`);
         });
 
         pull.on("close", code => {
@@ -128,8 +137,9 @@ function updatePhp( appIndex ){
 
 function updateNpm(appIndex){
 
-        bot.sendMessage(chat_id, "<!> git pull enviado");
-        send2log('git pull -> ' + apps[appIndex].nombre);
+        bot.sendMessage(chat_id,"<!> Actualizo " + apps[appIndex].nombre + " con el método para node");
+        send2log( from_name + " -> UPDATE -> " + apps[appIndex].nombre);
+        send2Dash( from_name + " está actualizando " + apps[appIndex].Nombre);
 
         let pull = spawn("git", ["-C", apps[appIndex].ruta, "pull", "https://"+ gitlabUser +":"+ gitlabPass + "@" + apps[appIndex].url] );
 
@@ -147,7 +157,7 @@ function updateNpm(appIndex){
                 send2log(`stderr: ${error} `);
                 bot.sendMessage(chat_id,`${error}`);
 
-                bot.sendMessage("[X] se canceló la actualización");
+                bot.sendMessage(chat_id,"[X] se canceló la actualización ->" + `${error}`);
 
                 return;
         });
@@ -179,6 +189,7 @@ function updateNpm(appIndex){
                         log_file.write(`stderr: ${error} \n`);
                         bot.sendMessage(chat_id,`${error}`);
 
+                        bot.sendMessage("<!> finalizado");
                 });
 
                 npmi.on("close", code => {
@@ -199,7 +210,6 @@ function updateNpm(appIndex){
         	                log_file.write(`stdout: ${data} \n`);
 
 	                        bot.sendMessage(chat_id, `${data}`);
-
                 	});
 
         	        npmbuild.on('error', (error) => {
@@ -207,7 +217,6 @@ function updateNpm(appIndex){
 	                        console.log(`stderr: ${error}`);
                         	log_file.write(`stderr: ${error} \n`);
                 	        bot.sendMessage(chat_id,`${error}`);
-
         	        });
 
 	                npmbuild.on("close", code => {
@@ -224,10 +233,8 @@ function updateNpm(appIndex){
 }
 
 function send2Dash( message ){
-        console.log(11111111)
-        console.log(message,config.apiurl,config.apitoken )
 
-        var config = {
+        var axiosconfig = {
                 method: 'post',
                 url: config.apiurl,
                 headers: {
@@ -237,13 +244,50 @@ function send2Dash( message ){
                 data : {"message": message}
         };
 
-        axios(config)
+        axios(axiosconfig)
         .then(function (response) {
-
-          console.log(JSON.stringify(response.data));
+                bot.sendMessage(chat_id, "<!> mensaje enviado a dashboard");
+          // console.log("<!> RESPONSE -->",JSON.stringify(response.data));
         })
         .catch(function (error) {
 
-          console.log(error);
+          console.log("[X] ERROR en send2dash----> ", error);
         });
+}
+
+function autoupdate(){
+
+        console.log("DIRNAME_>_>_>_>"+__dirname);
+
+        bot.sendMessage(chat_id,"<!> Autoactualizándome! ");
+        send2log( Date.now() + " - " + from_name + " -> AUTOUPDATE");
+
+        let pull = spawn( "git", ["pull"] );
+
+        pull.stdout.on("data", data => {
+
+                console.log(`stdout: ${data}`);
+                send2log(`stdout: ${data} `);
+
+                bot.sendMessage(chat_id, `${data}`);
+        });
+
+        pull.on('error', (error) => {
+
+                console.log(`stderr: ${error}`);
+                send2log(`stderr: ${error} `);
+
+                bot.sendMessage(chat_id,"[X] se canceló la actualización ->" + `${error}`);
+        });
+
+        pull.on("close", code => {
+
+                console.log(`child process exited with code ${code}`);
+                send2log(`child process exited with code ${code} `);
+
+                bot.sendMessage(chat_id,`child process exited with code ${code}`);
+
+                bot.sendMessage("<!> finalizado");
+        });
+
 }
