@@ -1,12 +1,12 @@
 /*
 
-Éste es el archivo de configuración.
-antes de comenzar debe configurar:
-token
-usuarios permitidos
-user y pass de gitlab
-aplicaciones
-
+Éste es el archivo de configuración. antes de comenzar debe configurar:
+-token
+-usuarios permitidos
+-user y pass de gitlab
+-aplicaciones y su forma de actualizar
+-url de la api
+-token de la api
 */
 
 // token del bot
@@ -59,8 +59,13 @@ var all_apps = [
 ];
 */
 
+const _apiurl  = <url de api para enviar mensajes al dash>
+const _apitoken = <token>
+
 module.exports.token = telegramToken;
 module.exports.gitlabUser = _gitlabUser;
 module.exports.gitlabPass = _gitlabPass;
 module.exports.apps = all_apps;
 module.exports.authorized = users_authorized;
+module.exports.apiurl = _apiurl;
+module.exports.apitoken = _apitoken;

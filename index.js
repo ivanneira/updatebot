@@ -1,13 +1,14 @@
 const TelegramBot = require( 'node-telegram-bot-api' );
 var spawn = require( 'child_process' ).spawn;
-var fs = require( 'fs' ); 
-var util = require( 'util' );
-var log_file = fs.createWriteStream( /*__dirname +*/ '/var/log/diachenko.log', {flags : 'w'} );
-var log_stdout = process.stdout;
-const https = require( 'https' );
 var axios = require( 'axios' );
 
 var config = require( './apps.js' );
+
+var fs = require( 'fs' ); 
+var util = require( 'util' );
+var log_file = fs.createWriteStream( /*__dirname +*/ '/var/log/updateBOT.log', {flags : 'w'} );
+var log_stdout = process.stdout;
+
 
 const token = config.token;
 
@@ -87,6 +88,8 @@ function update( appIndex ){
                 break;
         }
 }
+
+// logfile
 
 function send2log( logtext ){
 
@@ -224,7 +227,6 @@ function updateNpm(appIndex){
 }
 
 function send2Dash( message ){
-
 
         var config = {
                 method: 'post',
