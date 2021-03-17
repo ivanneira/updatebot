@@ -73,7 +73,7 @@ bot.on('message', (msg) => {
 
 bot.on('callback_query', function onCallbackQuery( callbackQuery ) {
 
-        bot.editMessageText("<!> ejecutando la órden", {"chat_id": callbackQuery.message.chat.id, "message_id": callbackQuery.message.message_id});
+        bot.editMessageText("<!> Órden recibida. procesando...", {"chat_id": callbackQuery.message.chat.id, "message_id": callbackQuery.message.message_id});
 
         update( callbackQuery.data );
 
@@ -260,6 +260,8 @@ function autoupdate(){
         console.log("DIRNAME_>_>_>_>"+__dirname);
 
         bot.sendMessage(chat_id,"<!> Autoactualizándome! ");
+        bot.sendPhoto(chat_id, __dirname + "RoboCop_dismemberd.jpg");
+        
         send2log( Date.now() + " - " + from_name + " -> AUTOUPDATE");
 
         let pull = spawn( "git", ["pull"] );
