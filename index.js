@@ -47,7 +47,7 @@ bot.on('message', (msg) => {
 
         if( typeof(authorized.find( item => item = from_id )) !== 'undefined' ){
 
-                if( /^/t/i.test(from_txt) ){
+                if( /^\/t/i.test(from_txt) ){
 
                         send2Dash(from_txt.substring(2));
                 }
