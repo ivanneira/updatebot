@@ -50,6 +50,7 @@ bot.on('message', (msg) => {
 
                 if( /^t/i.test(from_txt) ){
 
+                        console.log(from_txt.substring(1))
                         send2Dash(from_txt.substring(1));
                 }
 
