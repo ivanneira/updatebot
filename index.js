@@ -258,7 +258,13 @@ function send2Dash( message ){
 function autoupdate(){
 
         bot.sendMessage(chat_id,"<!> Autoactualizándome! ");
-        //bot.sendPhoto(chat_id, __dirname + "RoboCop_dismemberd.jpg");
+
+        const fileOptions = {
+                filename: 'RoboCop_dismemberd.jpg',
+                contentType: 'image/jpeg',
+              };
+
+        bot.sendPhoto(chat_id, fileOptions);
 
         send2log( Date.now() + " - " + from_name + " -> AUTOUPDATE");
 
