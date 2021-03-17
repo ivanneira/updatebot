@@ -1,24 +1,24 @@
-const TelegramBot = require( 'node-telegram-bot-api' );
-var spawn = require( 'child_process' ).spawn;
-var axios = require( 'axios' );
-var Datastore = require('nedb')
-  , db = new Datastore({ filename: __dirname + '/nedbFile', autoload: true });
+import TelegramBot from 'node-telegram-bot-api';
+import { spawn } from 'child_process';
+import axios from 'axios';
+import Datastore from 'nedb';
+var db = new Datastore({ filename: __dirname + '/nedbFile', autoload: true });
 
-var config = require( './apps.js' );
+import { token as _token, apps as _apps, gitlabUser as _gitlabUser, gitlabPass as _gitlabPass, authorized as _authorized, apiurl, apitoken } from './apps.js';
 
-var fs = require( 'fs' ); 
-var util = require( 'util' );
-var log_file = fs.createWriteStream( /*__dirname +*/ '/var/log/updateBOT.log', {flags : 'w'} );
+import { createWriteStream } from 'fs'; 
+import util from 'util';
+var log_file = createWriteStream( /*__dirname +*/ '/var/log/updateBOT.log', {flags : 'w'} );
 var log_stdout = process.stdout;
 
-const token = config.token;
+const token = _token;
 
-const apps = config.apps;
+const apps = _apps;
 
-const gitlabUser = config.gitlabUser;
-const gitlabPass = config.gitlabPass;
+const gitlabUser = _gitlabUser;
+const gitlabPass = _gitlabPass;
 
-const authorized = config.authorized;
+const authorized = _authorized;
 
 const bot = new TelegramBot(token, {polling: true});
 
@@ -239,10 +239,10 @@ function send2Dash( message ){
 
         var axiosconfig = {
                 method: 'post',
-                url: config.apiurl,
+                url: apiurl,
                 headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': config.apitoken,
+                  'Authorization': apitoken,
                 },
                 data : {"message": message}
         };
