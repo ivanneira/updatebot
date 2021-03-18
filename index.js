@@ -301,6 +301,8 @@ tipos:
                 let output = [];
 
                 docs.forEach(element => {
+
+                        console.log)(element)
                         
                         output.push(element)
                 });
