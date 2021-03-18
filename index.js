@@ -66,6 +66,8 @@ bot.on('message', (msg) => {
                 // traer logs
                 if( /^logsplease/i.test(from_txt) ){
 
+                        console.log("logs")
+
                         getLogs();
                 }
         }else{
@@ -283,26 +285,27 @@ function send2DB(tipo, mensaje){
 }
 
 function getLogs(){
+        console.log("logsfunction")
 
-/*
-tipos:
--update: actualización
--autoupdate: actualización del bot
--dashboard: mensaje al dashboard
-*/
+        /*
+        tipos:
+        -update: actualización
+        -autoupdate: actualización del bot
+        -dashboard: mensaje al dashboard
+        */
 
-db.find({}, function (err, docs) {
+        db.find({}, function (err, docs) {
+                
+                if( docs.length != 0 ){
+
+                        console.log(docs);
+
+                }else{
+
+                        bot.sendMessage( chat_id, "<!> No hay registros"); 
+                }
+
+        });
         
-        if( docs.length != 0 ){
-
-                console.log(docs);
-
-        }else{
-
-                bot.sendMessage( chat_id, "<!> No hay registros"); 
-        }
-
-      });
-      
 
 }
