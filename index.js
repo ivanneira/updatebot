@@ -1,6 +1,5 @@
 // módulos
 const TelegramBot = require( 'node-telegram-bot-api' );
-const fs = require('fs');
 var spawn = require( 'child_process' ).spawn;
 var axios = require( 'axios' );
 var Datastore = require('nedb')
