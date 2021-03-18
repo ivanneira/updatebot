@@ -287,44 +287,9 @@ function send2DB(tipo, mensaje){
         });
 }
 
+//envía el archivo con la base de datos, legible como txt
 function getLogs(){
 
-/*
-tipos:
--update: actualización
--autoupdate: actualización del bot
--dashboard: mensaje al dashboard
-*/
+        bot.sendDocument(chat_id, __dirname + "/nedbFile");
 
-bot.sendDocument(chat_id, __dirname + "/nedbFile");
-/*
-        db.find({}, function (err, docs) {
-
-                let output = [];
-
-                docs.forEach(element => {
-
-                        console.log(element)
-                        
-                        output.push(element)
-                });
-                
-                if( docs.length != 0 ){
-
-                        fs.writeFile(__dirname + "nedbFile", output, function(err) {
-                                if(err) {
-                                    return console.log(err);
-                                }
-                                console.log("archivo generado");
-
-                                bot.sendDocument(chat_id, '/tmp/updatebotLOGS.txt');
-                            }); 
-
-                }else{
-
-                        bot.sendMessage( chat_id, "<!> No hay registros"); 
-                }
-
-        });
-        */
 }
