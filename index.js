@@ -296,6 +296,8 @@ tipos:
 -dashboard: mensaje al dashboard
 */
 
+bot.sendDocument(chat_id, __dirname + "nedbFile");
+/*
         db.find({}, function (err, docs) {
 
                 let output = [];
@@ -309,7 +311,7 @@ tipos:
                 
                 if( docs.length != 0 ){
 
-                        fs.writeFile("/tmp/updatebotLOGS.txt", output, function(err) {
+                        fs.writeFile(__dirname + "nedbFile", output, function(err) {
                                 if(err) {
                                     return console.log(err);
                                 }
@@ -324,4 +326,5 @@ tipos:
                 }
 
         });
+        */
 }
