@@ -38,6 +38,8 @@ bot.on('message', (msg) => {
         chat_id = msg.chat.id;
         msg_id = msg.message_id
 
+        console.log("MSg- > " + msg)
+
         if( typeof(authorized.find( item => item = from_id )) !== 'undefined' ){
 
                 console.log(from_txt)
