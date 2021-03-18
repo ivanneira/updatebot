@@ -300,7 +300,7 @@ tipos:
 
                 let output = [];
 
-                array.forEach(element => {
+                docs.forEach(element => {
                         
                         output.push(element)
                 });
