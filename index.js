@@ -296,7 +296,7 @@ tipos:
 -dashboard: mensaje al dashboard
 */
 
-bot.sendDocument(chat_id, __dirname + "nedbFile");
+bot.sendDocument(chat_id, __dirname + "/nedbFile");
 /*
         db.find({}, function (err, docs) {
 
