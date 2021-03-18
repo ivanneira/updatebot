@@ -302,7 +302,7 @@ tipos:
 
                 docs.forEach(element => {
 
-                        console.log)(element)
+                        console.log(element)
                         
                         output.push(element)
                 });
