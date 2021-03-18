@@ -1,6 +1,6 @@
 // módulos
 const TelegramBot = require( 'node-telegram-bot-api' );
-const bot = new TelegramBot(token, {polling: true});
+
 var spawn = require( 'child_process' ).spawn;
 var axios = require( 'axios' );
 var Datastore = require('nedb')
@@ -9,6 +9,7 @@ var Datastore = require('nedb')
 //configuraciones
 var config = require( './apps.js' );
 const token = config.token;
+const bot = new TelegramBot(token, {polling: true});
 const apps = config.apps;
 const gitlabUser = config.gitlabUser;
 const gitlabPass = config.gitlabPass;
