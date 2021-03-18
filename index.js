@@ -40,6 +40,8 @@ bot.on('message', (msg) => {
 
         if( typeof(authorized.find( item => item = from_id )) !== 'undefined' ){
 
+                console.log(from_txt)
+
                 // mensajes para el dashboard "\t texto"
                 if( /^\/t/i.test(from_txt) ){
 
