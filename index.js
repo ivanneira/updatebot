@@ -15,8 +15,6 @@ const gitlabUser = config.gitlabUser;
 const gitlabPass = config.gitlabPass;
 const authorized = config.authorized;
 
-console.log(config)
-
 // teclado en chat
 let keyboard = [];
 
