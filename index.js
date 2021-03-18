@@ -1,29 +1,20 @@
+// módulos
 const TelegramBot = require( 'node-telegram-bot-api' );
+const bot = new TelegramBot(token, {polling: true});
 var spawn = require( 'child_process' ).spawn;
 var axios = require( 'axios' );
 var Datastore = require('nedb')
   , db = new Datastore({ filename: __dirname + '/nedbFile', autoload: true });
 
+//configuraciones
 var config = require( './apps.js' );
-
-var fs = require( 'fs' ); 
-var util = require( 'util' );
-var log_file = fs.createWriteStream( /*__dirname +*/ '/var/log/updateBOT.log', {flags : 'w'} );
-var log_stdout = process.stdout;
-
 const token = config.token;
-
 const apps = config.apps;
-
 const gitlabUser = config.gitlabUser;
 const gitlabPass = config.gitlabPass;
-
 const authorized = config.authorized;
 
-const bot = new TelegramBot(token, {polling: true});
-
 // teclado en chat
-
 let keyboard = [];
 
 for( let i = 0 ; i < apps.length ; i++ ){
@@ -33,12 +24,12 @@ for( let i = 0 ; i < apps.length ; i++ ){
 }
 
 // datos del mensaje
-
 let from_name;
 let from_id;
 let from_txt;
 let chat_id;
 
+//eventos
 bot.on('message', (msg) => {
 
         from_name = msg.from.first_name;
@@ -49,12 +40,13 @@ bot.on('message', (msg) => {
 
         if( typeof(authorized.find( item => item = from_id )) !== 'undefined' ){
 
+                // mensajes para el dashboard "\t texto"
                 if( /^\/t/i.test(from_txt) ){
 
                         send2Dash(from_txt.substring(2));
-                        send2DB('dashboard', {"id": chat_id, "nombre": from_name, "mensaje": from_txt});
                 }
 
+                // actualización de aplicaciones
                 if( /^pull/i.test(from_txt) ){
 
                         bot.sendMessage(chat_id, "Seleccione aplicación para actualizar",
@@ -65,6 +57,7 @@ bot.on('message', (msg) => {
                         });
                 }
 
+                // autoactualización
                 if( /^autoupdateplease/i.test(from_txt) ){
 
                         autoupdate();
@@ -96,17 +89,11 @@ function update( appIndex ){
         }
 }
 
-// logfile
-
-function send2log( logtext ){
-
-        log_file.write( "[" + Date.now() + "] - " + logtext + '\n' );
-}
-
+// actualización de aplicación en php sin build
 function updatePhp( appIndex ){
 
         bot.sendMessage(chat_id,"<!> Actualizo " + apps[appIndex].nombre + " con el método para php");
-        send2log( from_name + " -> UPDATE -> " + apps[appIndex].nombre);
+        send2DB("update", "PHP method update in " + apps[appIndex].nombre);
         send2Dash( from_name + " está actualizando " + apps[appIndex].Nombre);
 
         let pull = spawn( "git", ["-C", apps[appIndex].ruta ,"pull","https://"+ gitlabUser + ":" + gitlabPass + "@" + apps[appIndex].url] );
@@ -114,34 +101,28 @@ function updatePhp( appIndex ){
         pull.stdout.on("data", data => {
 
                 console.log(`stdout: ${data}`);
-                send2log(`stdout: ${data} `);
-
                 bot.sendMessage(chat_id, `${data}`);
         });
 
         pull.on('error', (error) => {
 
                 console.log(`stderr: ${error}`);
-                send2log(`stderr: ${error} `);
-
                 bot.sendMessage(chat_id,"[X] se canceló la actualización ->" + `${error}`);
         });
 
         pull.on("close", code => {
 
                 console.log(`child process exited with code ${code}`);
-                send2log(`child process exited with code ${code} `);
-
                 bot.sendMessage(chat_id,`child process exited with code ${code}`);
-
                 bot.sendMessage(chat_id, "<!> finalizado");
         });
 }
 
+// actualización de aplicación en node con build
 function updateNpm(appIndex){
 
         bot.sendMessage(chat_id,"<!> Actualizo " + apps[appIndex].nombre + " con el método para node");
-        send2log( from_name + " -> UPDATE -> " + apps[appIndex].nombre);
+        send2DB("update", "NPM method (with build) update in " + apps[appIndex].nombre);
         send2Dash( from_name + " está actualizando " + apps[appIndex].Nombre);
 
         let pull = spawn("git", ["-C", apps[appIndex].ruta, "pull", "https://"+ gitlabUser +":"+ gitlabPass + "@" + apps[appIndex].url] );
@@ -149,31 +130,22 @@ function updateNpm(appIndex){
         pull.stdout.on("data", data => {
 
                 console.log(`stdout: ${data}`);
-                send2log(`stdout: ${data} `);
-                
                 bot.sendMessage(chat_id, `${data}`);
         });
 
         pull.on('error', (error) => {
 
                 console.log(`stderr: ${error}`);
-                send2log(`stderr: ${error} `);
                 bot.sendMessage(chat_id,`${error}`);
-
                 bot.sendMessage(chat_id,"[X] se canceló la actualización ->" + `${error}`);
-
-                return;
         });
 
         pull.on("close", code => {
 
                 console.log(`child process exited with code ${code}`);
-                send2log(`child process exited with code ${code} `);
                 bot.sendMessage(chat_id,`child process exited with code ${code}`);
 
-
                 bot.sendMessage(chat_id, "<!> npm install enviado");
-                send2log('npm i -> ' + apps[appIndex].nombre);
 
                 let npmi = spawn( "npm", ['i', '--prefix', apps[appIndex].ruta] );
 
@@ -181,7 +153,6 @@ function updateNpm(appIndex){
 
                         console.log(`stdout: ${data}`);
                         log_file.write(`stdout: ${data} \n`);
-
                         bot.sendMessage(chat_id, `${data}`);
 
                 });
@@ -189,44 +160,34 @@ function updateNpm(appIndex){
                 npmi.on('error', (error) => {
 
                         console.log(`stderr: ${error}`);
-                        log_file.write(`stderr: ${error} \n`);
                         bot.sendMessage(chat_id,`${error}`);
-
                         bot.sendMessage(chat_id, "<!> finalizado");
                 });
 
                 npmi.on("close", code => {
 
                         console.log(`child process exited with code ${code}`);
-                        log_file.write(`child process exited with code ${code} \n`);
                         bot.sendMessage(chat_id,`child process exited with code ${code}`);
 
                         bot.sendMessage(chat_id, "<!> npm run build enviado");
-
-                	log_file.write('build -> \n' + apps[appIndex].nombre);
 
         	        let npmbuild = spawn("npm", ['run','build', '--prefix', apps[appIndex].ruta]);
 
 	                npmbuild.stdout.on("data", data => {
 
                 	        console.log(`stdout: ${data}`);
-        	                log_file.write(`stdout: ${data} \n`);
-
 	                        bot.sendMessage(chat_id, `${data}`);
                 	});
 
         	        npmbuild.on('error', (error) => {
 
 	                        console.log(`stderr: ${error}`);
-                        	log_file.write(`stderr: ${error} \n`);
                 	        bot.sendMessage(chat_id,`${error}`);
         	        });
 
 	                npmbuild.on("close", code => {
 
                         	console.log(`child process exited with code ${code}`);
-                	        log_file.write(`child process exited with code ${code} \n`);
-
         	                bot.sendMessage(chat_id,`child process exited with code ${code}`);
 
                                 bot.sendMessage(chat_id, "<!> finalizado");
@@ -237,7 +198,10 @@ function updateNpm(appIndex){
 
 function send2Dash( message ){
 
+        send2DB("dashboard",message);
+
         var axiosconfig = {
+
                 method: 'post',
                 url: config.apiurl,
                 headers: {
@@ -249,8 +213,8 @@ function send2Dash( message ){
 
         axios(axiosconfig)
         .then(function (response) {
+
                 bot.sendMessage(chat_id, "<!> mensaje enviado a dashboard");
-          // console.log("<!> RESPONSE -->",JSON.stringify(response.data));
         })
         .catch(function (error) {
 
@@ -259,6 +223,8 @@ function send2Dash( message ){
 }
 
 function autoupdate(){
+
+        send2DB("autoupdate", "autoupdate");
 
         bot.sendMessage(chat_id,"<!> Autoactualizándome! ");
 
@@ -269,48 +235,68 @@ function autoupdate(){
 
         bot.sendPhoto(chat_id, 'RoboCop_dismemberd.jpg');
 
-        send2log( Date.now() + " - " + from_name + " -> AUTOUPDATE");
-
         let pull = spawn( "git", ["pull"] );
 
         pull.stdout.on("data", data => {
 
                 console.log(`stdout: ${data}`);
-                send2log(`stdout: ${data} `);
-
                 bot.sendMessage(chat_id, `${data}`);
         });
 
         pull.on('error', (error) => {
 
                 console.log(`stderr: ${error}`);
-                send2log(`stderr: ${error} `);
-
                 bot.sendMessage(chat_id,"[X] se canceló la actualización ->" + `${error}`);
         });
 
         pull.on("close", code => {
 
                 console.log(`child process exited with code ${code}`);
-                send2log(`child process exited with code ${code} `);
-
                 bot.sendMessage(chat_id,`child process exited with code ${code}`);
 
                 bot.sendMessage( chat_id, "<!> finalizado");
         });
-
 }
 
-function send2DB(tipo,datos){
+function send2DB(tipo, mensaje){
+        
+        let doc = 
+        {
+                "id": chat_id,
+                "timestamp": Date.now(),
+                "tipo": tipo,
+                "nombre": from_name,
+                "mensaje": mensaje
 
-        switch(tipo){
+        };
 
-                case 'dashboard':
-                        db.insert(datos, function(err,newDoc){
-                                
-                                if(err) console.log("[X] Error al escribir la base de datos");
-                        });
-                break;
+        db.insert(doc, function(err,newDoc){
+                
+                if(err) console.log("[X] Error al escribir la base de datos");
+        });
+}
+
+function getLogs(){
+
+/*
+tipos:
+-update: actualización
+-autoupdate: actualización del bot
+-dashboard: mensaje al dashboard
+*/
+
+db.find({}, function (err, docs) {
+        
+        if( docs.length != 0 ){
+
+                console.log(docs);
+
+        }else{
+
+                bot.sendMessage( chat_id, "<!> No hay registros"); 
         }
+
+      });
+      
 
 }
