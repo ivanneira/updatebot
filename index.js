@@ -1,6 +1,6 @@
 // módulos
 const TelegramBot = require( 'node-telegram-bot-api' );
-
+const fs = require('fs');
 var spawn = require( 'child_process' ).spawn;
 var axios = require( 'axios' );
 var Datastore = require('nedb')
@@ -69,8 +69,6 @@ bot.on('message', (msg) => {
                 // traer logs
                 if( /^logsplease/i.test(from_txt) ){
 
-                        console.log("logs")
-
                         getLogs();
                 }
         }else{
@@ -134,7 +132,7 @@ function updateNpm(appIndex){
 
         bot.sendMessage(chat_id,"<!> Actualizo " + apps[appIndex].nombre + " con el método para node");
         send2DB("update", "NPM method (with build) update in " + apps[appIndex].nombre);
-        send2Dash( from_name + " está actualizando " + apps[appIndex].Nombre);
+        send2Dash( from_name + " está actualizando " + apps[appIndex].nombre);
 
         let pull = spawn("git", ["-C", apps[appIndex].ruta, "pull", "https://"+ gitlabUser +":"+ gitlabPass + "@" + apps[appIndex].url] );
 
@@ -290,20 +288,26 @@ function send2DB(tipo, mensaje){
 }
 
 function getLogs(){
-        console.log("logsfunction")
 
-        /*
-        tipos:
-        -update: actualización
-        -autoupdate: actualización del bot
-        -dashboard: mensaje al dashboard
-        */
+/*
+tipos:
+-update: actualización
+-autoupdate: actualización del bot
+-dashboard: mensaje al dashboard
+*/
 
         db.find({}, function (err, docs) {
                 
                 if( docs.length != 0 ){
 
-                        console.log(docs);
+                        fs.writeFile("/tmp/updatebotLOGS", docs, function(err) {
+                                if(err) {
+                                    return console.log(err);
+                                }
+                                console.log("archivo generado");
+
+                                bot.sendDocument(chat_id, '/tmp/updatebotLOGS');
+                            }); 
 
                 }else{
 
@@ -311,6 +315,4 @@ function getLogs(){
                 }
 
         });
-        
-
 }
