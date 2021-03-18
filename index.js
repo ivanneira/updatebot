@@ -62,6 +62,12 @@ bot.on('message', (msg) => {
 
                         autoupdate();
                 }
+
+                // traer logs
+                if( /^logsplease/i.test(from_txt) ){
+
+                        getLogs();
+                }
         }else{
                 return;
         }
