@@ -33,7 +33,7 @@ let chat_id;
 bot.on('message', (msg) => {
 
 
-        console.log(msg)
+        // console.log(msg)
 
         from_name = msg.from.first_name;
         from_id = msg.from.id;
