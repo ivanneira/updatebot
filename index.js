@@ -297,16 +297,23 @@ tipos:
 */
 
         db.find({}, function (err, docs) {
+
+                let output = [];
+
+                array.forEach(element => {
+                        
+                        output.push(element)
+                });
                 
                 if( docs.length != 0 ){
 
-                        fs.writeFile("/tmp/updatebotLOGS", docs, function(err) {
+                        fs.writeFile("/tmp/updatebotLOGS.txt", output, function(err) {
                                 if(err) {
                                     return console.log(err);
                                 }
                                 console.log("archivo generado");
 
-                                bot.sendDocument(chat_id, '/tmp/updatebotLOGS');
+                                bot.sendDocument(chat_id, '/tmp/updatebotLOGS.txt');
                             }); 
 
                 }else{
