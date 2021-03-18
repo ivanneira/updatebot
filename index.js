@@ -103,11 +103,9 @@ function update( appIndex ){
 // actualización de aplicación en php sin build
 function updatePhp( appIndex ){
 
-        console.log(from_name + " está actualizando " + apps[appIndex].Nombre)
-
         bot.sendMessage(chat_id,"<!> Actualizo " + apps[appIndex].nombre + " con el método para php");
         send2DB("update", "PHP method update in " + apps[appIndex].nombre);
-        send2Dash( from_name + " está actualizando " + apps[appIndex].Nombre);
+        send2Dash( from_name + " está actualizando " + apps[appIndex].nombre);
 
         let pull = spawn( "git", ["-C", apps[appIndex].ruta ,"pull","https://"+ gitlabUser + ":" + gitlabPass + "@" + apps[appIndex].url] );
 
