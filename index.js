@@ -15,6 +15,8 @@ const gitlabUser = config.gitlabUser;
 const gitlabPass = config.gitlabPass;
 const authorized = config.authorized;
 
+console.log(config)
+
 // teclado en chat
 let keyboard = [];
 
@@ -39,11 +41,7 @@ bot.on('message', (msg) => {
         chat_id = msg.chat.id;
         msg_id = msg.message_id
 
-        console.log("MSg- > " + msg)
-
         if( typeof(authorized.find( item => item = from_id )) !== 'undefined' ){
-
-                console.log(from_txt)
 
                 // mensajes para el dashboard "\t texto"
                 if( /^\/t/i.test(from_txt) ){
@@ -272,11 +270,13 @@ function autoupdate(){
 }
 
 function send2DB(tipo, mensaje){
+
+        let timestamp = Date.now();
         
         let doc = 
         {
                 "id": chat_id,
-                "timestamp": Date.now(),
+                "timestamp": timestamp,
                 "tipo": tipo,
                 "nombre": from_name,
                 "mensaje": mensaje
