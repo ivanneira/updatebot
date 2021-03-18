@@ -32,6 +32,9 @@ let chat_id;
 //eventos
 bot.on('message', (msg) => {
 
+
+        console.log(msg)
+
         from_name = msg.from.first_name;
         from_id = msg.from.id;
         from_txt = msg.text;
