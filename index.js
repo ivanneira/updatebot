@@ -75,7 +75,7 @@ bot.on('message', (msg) => {
                 // test
                 if( /^qqqq/i.test(from_txt) ){
 
-                        test();
+                        temp();
                 }
         }else{
                 return;
