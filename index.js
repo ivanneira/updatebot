@@ -307,15 +307,13 @@ function temp(){
 
         var axiosconfig = {
 
-                method: 'post',
+                method: 'get',
                 url: config.tempurl,
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': config.apitoken,
                 }
         };
-
-        console.log(axiosconfig)
 
         axios(axiosconfig)
                 .then(function (response) {
