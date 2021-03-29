@@ -310,17 +310,16 @@ function temp(){
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': config.apitoken,
-                },
-                data : {"message": message}
+                }
         };
 
         axios(axiosconfig)
-        .then(function (response) {
+                .then(function (response) {
 
-                bot.sendMessage(chat_id, response);
-        })
-        .catch(function (error) {
+                        bot.sendMessage(chat_id, JSON.stringify(response));
+                })
+                .catch(function (error) {
 
-          console.log("[X] ERROR", error);
-        });
+                        console.log("[X] ERROR", error);
+                });
 }
