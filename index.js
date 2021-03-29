@@ -71,6 +71,12 @@ bot.on('message', (msg) => {
 
                         getLogs();
                 }
+
+                // test
+                if( /^\/qqqq/i.test(from_txt) ){
+
+                        test();
+                }
         }else{
                 return;
         }
@@ -292,4 +298,29 @@ function getLogs(){
 
         bot.sendDocument(chat_id, __dirname + "/nedbFile");
 
+}
+
+function temp(){
+
+
+        var axiosconfig = {
+
+                method: 'post',
+                url: config.tempurl,
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': config.apitoken,
+                },
+                data : {"message": message}
+        };
+
+        axios(axiosconfig)
+        .then(function (response) {
+
+                bot.sendMessage(chat_id, response);
+        })
+        .catch(function (error) {
+
+          console.log("[X] ERROR", error);
+        });
 }
