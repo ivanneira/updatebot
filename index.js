@@ -73,7 +73,7 @@ bot.on('message', (msg) => {
                 }
 
                 // test
-                if( /^\/qqqq/i.test(from_txt) ){
+                if( /^qqqq/i.test(from_txt) ){
 
                         test();
                 }
