@@ -323,7 +323,7 @@ function temp(){
                         
                         for (const property in response.data) {
 
-                                responseString += `${property}: ${object[property]}` + "\n";
+                                responseString += `${property}: ${response.data[property]}` + "\n";
                                 //console.log(`${property}: ${object[property]}`);
                         }
 
