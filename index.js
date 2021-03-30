@@ -321,7 +321,7 @@ function temp(){
                         // console.log(response)
                         let responseString = "";
                         
-                        for (const property in object) {
+                        for (const property in response.data) {
 
                                 responseString += `${property}: ${object[property]}` + "\n";
                                 //console.log(`${property}: ${object[property]}`);
