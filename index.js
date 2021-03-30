@@ -33,7 +33,7 @@ let chat_id;
 bot.on('message', (msg) => {
 
 
-        console.log(msg)
+        // console.log(msg)
 
         from_name = msg.from.first_name;
         from_id = msg.from.id;
@@ -302,7 +302,7 @@ function getLogs(){
 
 function temp(){
 
-        console.log(config.apitoken)
+        // console.log(config.apitoken)
 
 
         var axiosconfig = {
@@ -318,9 +318,17 @@ function temp(){
         axios(axiosconfig)
                 .then(function (response) {
 
-                        console.log(response)
+                        // console.log(response)
+                        let responseString = "";
+                        
+                        for (const property in object) {
 
-                        bot.sendMessage(chat_id, JSON.stringify(response.data));
+                                responseString += `${property}: ${object[property]}` + "\n";
+                                //console.log(`${property}: ${object[property]}`);
+                        }
+
+                        // bot.sendMessage(chat_id, JSON.stringify(response.data));
+                        bot.sendMessage(chat_id, responseString);
                 })
                 .catch(function (error) {
 
