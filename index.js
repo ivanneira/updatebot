@@ -63,7 +63,7 @@ bot.on('message', (msg) => {
                 // autoactualización
                 if( /^autoupdateplease/i.test(from_txt) ){
 
-                        autoupdate();
+                        // autoupdate();
                 }
 
                 // traer logs
