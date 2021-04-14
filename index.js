@@ -81,19 +81,19 @@ bot.on('message', (msg) => {
 
                                 let date1 = from_txt.split( ' ' )[1];
 
-                                console.log("!1")
+                                console.log("!1",date1)
 
                                 date1 = date1.split('-');
 
-                                console.log("!2")
+                                console.log("!2",date1)
         
                                 date2 = new Date(date1[1] + "-" + date1[0] + "-" + date1[2]);
 
-                                console.log("!3")
+                                console.log("!3",date2)
 
                                 date2 = date2.toISOString.split('T')[0];
 
-                                console.log("!4")
+                                console.log("!4",date2)
 
 
                         }else{
