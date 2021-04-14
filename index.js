@@ -77,7 +77,7 @@ bot.on('message', (msg) => {
 
                         let d = from_txt.split( ' ' );
 
-                        if( d.length < 1){
+                        if( d.length > 1){
 
                                 let date1 = from_txt.split( ' ' )[1];
 
