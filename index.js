@@ -75,7 +75,13 @@ bot.on('message', (msg) => {
                 // test
                 if( /^qqqq/i.test(from_txt) ){
 
-                        temp();
+                        let date1 = from_txt.split( ' ' )[1];
+
+                        date1 = date1.split('-');
+
+                        date2 = new Date(date1[1] + "-" + date1[0] + "-" + date1[2]);
+
+                        temp(date2);
                 }
         }else{
                 return;
@@ -300,11 +306,13 @@ function getLogs(){
 
 }
 
-function temp(){
+function temp(date){
+
+        bot.sendMessage(chat_id, date)
 
         // console.log(config.apitoken)
 
-
+/*
         var axiosconfig = {
 
                 method: 'get',
@@ -334,4 +342,5 @@ function temp(){
 
                         console.log("[X] ERROR", error);
                 });
+                */
 }
