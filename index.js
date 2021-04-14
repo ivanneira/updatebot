@@ -87,7 +87,7 @@ bot.on('message', (msg) => {
 
                         }else{
 
-                                date2 = Date.now();
+                                date2 = new Date( Date.now() ).split(':')[0];
                         }
 
                         
