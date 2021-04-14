@@ -91,9 +91,9 @@ bot.on('message', (msg) => {
 
                                 console.log("!3",date2)
 
-                                date3 = date2.toISOString.split('T')[0];
+                                date2 = date2.split('T')[0];
 
-                                console.log("!4",date3)
+                                console.log("!4",date2)
 
 
                         }else{
