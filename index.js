@@ -75,11 +75,22 @@ bot.on('message', (msg) => {
                 // test
                 if( /^qqqq/i.test(from_txt) ){
 
-                        let date1 = from_txt.split( ' ' )[1];
+                        let d = from_txt.split( ' ' );
 
-                        date1 = date1.split('-');
+                        if( d.length < 1){
 
-                        date2 = new Date(date1[1] + "-" + date1[0] + "-" + date1[2]);
+                                let date1 = from_txt.split( ' ' )[1];
+
+                                date1 = date1.split('-');
+        
+                                date2 = new Date(date1[1] + "-" + date1[0] + "-" + date1[2]);
+
+                        }else{
+
+                                date2 = Date.now();
+                        }
+
+                        
 
                         temp(date2);
                 }
@@ -312,7 +323,7 @@ function temp(date){
 
         // console.log(config.apitoken)
 
-/*
+
         var axiosconfig = {
 
                 method: 'get',
@@ -342,5 +353,5 @@ function temp(date){
 
                         console.log("[X] ERROR", error);
                 });
-                */
+                
 }
