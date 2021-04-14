@@ -82,8 +82,8 @@ bot.on('message', (msg) => {
                                 let date1 = from_txt.split( ' ' )[1];
 
                                 date1 = date1.split('-');
-        
-                                date2 = new Date(date1[1] + "-" + date1[0] + "-" + date1[2]);
+
+                                date2 = new Date(date1[2] + "-" + date1[1] + "-" + date1[0]).toISOString.split('T')[0];
 
                         }else{
 
