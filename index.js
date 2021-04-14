@@ -83,11 +83,7 @@ bot.on('message', (msg) => {
 
                                 date1 = date1.split('-');
         
-                                date2 = new Date(date1[1] + "-" + date1[0] + "-" + date1[2]);
-
-                                datef = date2.toString().split('T')[0];
-
-                                date2 = datef;
+                                date2 = new Date(date1[1] + "-" + date1[0] + "-" + date1[2]).toISOString();
 
                         }else{
 
