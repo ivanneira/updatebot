@@ -91,9 +91,7 @@ bot.on('message', (msg) => {
 
                                 console.log("!3",date2)
 
-                                date2 = date2.split('T')[0];
 
-                                console.log("!4",date2)
 
 
                         }else{
