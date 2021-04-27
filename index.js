@@ -99,22 +99,24 @@ bot.on('message', (msg) => {
 
                 if(  /^exp/i.test(from_txt) ){
 
-                        https.get('https://mosp.sanjuan.gob.ar/ol/?or=2B331CC34D344C31875DED5E05060FAA&Prefijo=800&Numero=002686&Anio=2021&Tipo=EXP&Movimientos=1', (resp) => {
+                        console.log("1")
 
+                        https.get('https://mosp.sanjuan.gob.ar/ol/?or=2B331CC34D344C31875DED5E05060FAA&Prefijo=800&Numero=002686&Anio=2021&Tipo=EXP&Movimientos=1', (resp) => {
+                                console.log("2")
                           let data = '';
 
                           // A chunk of data has been recieved.
-                          resp.on('data', (chunk) => {
+                          resp.on('data', (chunk) => {console.log("3")
                             data += chunk;
                           });
 
                           // The whole response has been received. Print out the result.
-                          resp.on('end', () => {
+                          resp.on('end', () => {console.log("4")
                             console.log(JSON.parse(data));
                                 bot.sendMessage(chat_id, data);
                           });
 
-                        }).on("error", (err) => {
+                        }).on("error", (err) => {console.log("5")
                                   console.log("Error: " + err.message);
                         });
                 }
