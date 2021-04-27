@@ -382,20 +382,8 @@ function expediente (prefijo, numero, año){
         axios(axiosconfig)
                 .then(function (response) {
 
-                        // console.log(response)
-                        let responseString = "";
-                        
-                        for (const property in response.data) {
 
-                                console.log(response.data)
-                                console.log(response.data.res)
-
-                                responseString += `${property}: ${response.data[property]}` + "\n";
-                                //console.log(`${property}: ${object[property]}`);
-                        }
-
-                        // bot.sendMessage(chat_id, JSON.stringify(response.data));
-                        bot.sendMessage(chat_id, responseString);
+                        bot.sendMessage(chat_id, response.data.res);
                 })
                 .catch(function (error) {
 
