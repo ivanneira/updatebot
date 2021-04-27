@@ -373,10 +373,11 @@ function expediente (prefijo, numero, año){
                 method: 'get',
                 url: "https://mosp.sanjuan.gob.ar/ol/?or=2B331CC34D344C31875DED5E05060FAA&Prefijo=" + prefijo + "&Numero=" + numero + "&Anio=" + año + "&Tipo=EXP&Movimientos=1",
                 headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': config.apitoken,
+                  'Content-Type': 'application/json'
                 }
         };
+
+        console.log(axiosconfig.url)
 
         axios(axiosconfig)
                 .then(function (response) {
