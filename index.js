@@ -387,6 +387,9 @@ function expediente (prefijo, numero, año){
                         
                         for (const property in response.data) {
 
+                                console.log(response.data)
+                                console.log(response.data.res)
+
                                 responseString += `${property}: ${response.data[property]}` + "\n";
                                 //console.log(`${property}: ${object[property]}`);
                         }
