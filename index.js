@@ -377,13 +377,21 @@ function expediente (prefijo, numero, año){
                 }
         };
 
-        console.log(axiosconfig.url)
-
         axios(axiosconfig)
                 .then(function (response) {
 
+                        // console.log(response)
+                        let responseString = "";
+                        
+                        for (const property in response.data) {
 
-                        bot.sendMessage(chat_id, response.data.res);
+
+                                responseString += `${property}: ${response.data[property]}` + "\n";
+                                
+                        }
+
+                        bot.sendMessage(chat_id, JSON.stringify(response.data));
+                        //bot.sendMessage(chat_id, response.data.res);
                 })
                 .catch(function (error) {
 
