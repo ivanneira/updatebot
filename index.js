@@ -97,7 +97,8 @@ bot.on('message', (msg) => {
 
                 // expediente dani
 
-                if(msg.text == 'exp'){
+                if(from_txt == 'exp'){
+                        
                         https.get('https://mosp.sanjuan.gob.ar/ol/?or=2B331CC34D344C31875DED5E05060FAA&Prefijo=800&Numero=002686&Anio=2021&Tipo=EXP&Movimientos=1', (resp) => {
 
                           let data = '';
