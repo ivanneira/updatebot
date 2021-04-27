@@ -99,26 +99,9 @@ bot.on('message', (msg) => {
 
                 if(  /^exp/i.test(from_txt) ){
 
-                        console.log("1")
 
-                        https.get('https://mosp.sanjuan.gob.ar/ol/?or=2B331CC34D344C31875DED5E05060FAA&Prefijo=800&Numero=002686&Anio=2021&Tipo=EXP&Movimientos=1', (resp) => {
-                                console.log("2")
-                          let data = '';
+                        expediente("800","002686","2021");
 
-                          // A chunk of data has been recieved.
-                          resp.on('data', (chunk) => {console.log("3")
-                            data += chunk;
-                          });
-
-                          // The whole response has been received. Print out the result.
-                          resp.on('end', () => {console.log("4")
-                            console.log(JSON.parse(data));
-                                bot.sendMessage(chat_id, data);
-                          });
-
-                        }).on("error", (err) => {console.log("5")
-                                  console.log("Error: " + err.message);
-                        });
                 }
         }else{
                 return;
@@ -380,4 +363,40 @@ function temp(date){
                         console.log("[X] ERROR", error);
                 });
                 
+}
+
+
+function expediente (prefijo, numero, año){
+
+        var axiosconfig = {
+
+                method: 'get',
+                url: "https://mosp.sanjuan.gob.ar/ol/?or=2B331CC34D344C31875DED5E05060FAA&Prefijo=" + prefijo + "&Numero=" + numero + "&Anio=" + año + "&Tipo=EXP&Movimientos=1",
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': config.apitoken,
+                }
+        };
+
+        axios(axiosconfig)
+                .then(function (response) {
+
+                        // console.log(response)
+                        let responseString = "";
+                        
+                        for (const property in response.data) {
+
+                                responseString += `${property}: ${response.data[property]}` + "\n";
+                                //console.log(`${property}: ${object[property]}`);
+                        }
+
+                        // bot.sendMessage(chat_id, JSON.stringify(response.data));
+                        bot.sendMessage(chat_id, responseString);
+                })
+                .catch(function (error) {
+
+                        console.log("[X] ERROR", error);
+                });
+
+
 }
