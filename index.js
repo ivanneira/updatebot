@@ -103,6 +103,13 @@ bot.on('message', (msg) => {
                         expediente("800","002686","2021");
 
                 }
+
+                if(  /^com/i.test(from_txt) ){
+
+
+                        comision();
+
+                }
         }else{
                 return;
         }
@@ -397,6 +404,108 @@ function expediente (prefijo, numero, año){
 
                         console.log("[X] ERROR", error);
                 });
+
+
+}
+
+function comision (){
+
+        // damian
+        
+        var axiosconfig = {
+
+                method: 'get',
+                url: "https://mosp.sanjuan.gob.ar/ol/?or=2B331CC34D344C31875DED5E05060FAA&Prefijo=703&Numero=34&Anio=2021&Tipo=EXP&Movimientos=1",
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+        };
+
+        axios(axiosconfig)
+                .then(function (response) {
+
+                        // console.log(response)
+                        let responseString = "";
+                        
+                        for (const property in response.data) {
+
+
+                                responseString += `${property}: ${response.data[property]}` + "\n";
+                                
+                        }
+
+                        bot.sendMessage(chat_id, JSON.stringify(response.data));
+                        //bot.sendMessage(chat_id, response.data.res);
+                })
+                .catch(function (error) {
+
+                        console.log("[X] ERROR", error);
+                });
+
+
+                // ivan
+        
+                var axiosconfig = {
+
+                        method: 'get',
+                        url: "https://mosp.sanjuan.gob.ar/ol/?or=2B331CC34D344C31875DED5E05060FAA&Prefijo=703&Numero=35&Anio=2021&Tipo=EXP&Movimientos=1",
+                        headers: {
+                          'Content-Type': 'application/json'
+                        }
+                };
+        
+                axios(axiosconfig)
+                        .then(function (response) {
+        
+                                // console.log(response)
+                                let responseString = "";
+                                
+                                for (const property in response.data) {
+        
+        
+                                        responseString += `${property}: ${response.data[property]}` + "\n";
+                                        
+                                }
+        
+                                bot.sendMessage(chat_id, JSON.stringify(response.data));
+                                //bot.sendMessage(chat_id, response.data.res);
+                        })
+                        .catch(function (error) {
+        
+                                console.log("[X] ERROR", error);
+                        });
+
+                // seba
+        
+                var axiosconfig = {
+
+                        method: 'get',
+                        url: "https://mosp.sanjuan.gob.ar/ol/?or=2B331CC34D344C31875DED5E05060FAA&Prefijo=703&Numero=36&Anio=2021&Tipo=EXP&Movimientos=1",
+                        headers: {
+                        'Content-Type': 'application/json'
+                        }
+                };
+
+                axios(axiosconfig)
+                        .then(function (response) {
+
+                                // console.log(response)
+                                let responseString = "";
+                                
+                                for (const property in response.data) {
+
+
+                                        responseString += `${property}: ${response.data[property]}` + "\n";
+                                        
+                                }
+
+                                bot.sendMessage(chat_id, JSON.stringify(response.data));
+                                //bot.sendMessage(chat_id, response.data.res);
+                        })
+                        .catch(function (error) {
+
+                                console.log("[X] ERROR", error);
+                        });
 
 
 }
