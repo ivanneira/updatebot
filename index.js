@@ -434,7 +434,7 @@ function comision (){
                                 
                         }
 
-                        bot.sendMessage(chat_id, JSON.stringify(response.data.res));
+                        bot.sendMessage(chat_id, "Damián" + JSON.stringify(response.data.res));
                         //bot.sendMessage(chat_id, response.data.res);
                 })
                 .catch(function (error) {
@@ -467,7 +467,7 @@ function comision (){
                                         
                                 }
         
-                                bot.sendMessage(chat_id, JSON.stringify(response.data.res));
+                                bot.sendMessage(chat_id, "Iván" + JSON.stringify(response.data.res));
                                 //bot.sendMessage(chat_id, response.data.res);
                         })
                         .catch(function (error) {
@@ -499,7 +499,7 @@ function comision (){
                                         
                                 }
 
-                                bot.sendMessage(chat_id, JSON.stringify(response.data.res));
+                                bot.sendMessage(chat_id, "Seba" + JSON.stringify(response.data.res));
                                 //bot.sendMessage(chat_id, response.data.res);
                         })
                         .catch(function (error) {
