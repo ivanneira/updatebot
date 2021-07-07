@@ -72,6 +72,18 @@ bot.on('message', (msg) => {
                         getLogs();
                 }
 
+                // activar webmin
+                if( /^web/i.test(from_txt) ){
+
+                        webminon();
+                }
+
+                // activar webmin
+                if( /^q/i.test(from_txt) ){
+
+                        webminoff();
+                }
+
                 // test
                 if( /^qqqq/i.test(from_txt) ){
 
@@ -507,5 +519,58 @@ function comision (){
                                 console.log("[X] ERROR", error);
                         });
 
+
+}
+
+function webminon(){
+
+        bot.sendMessage(chat_id, "<!> cambiando la configuración");
+
+        let ensite = spawn( "a2ensite", ["/etc/apache2/sites-available/webmin.conf"] );
+
+        ensite.stdout.on("data", data => {
+
+                console.log(`stdout: ${data}`);
+                log_file.write(`stdout: ${data} \n`);
+                bot.sendMessage(chat_id, `${data}`);
+
+        });
+
+        ensite.on('error', (error) => {
+
+                console.log(`stderr: ${error}`);
+                bot.sendMessage(chat_id,`${error}`);
+                bot.sendMessage(chat_id, "<!> finalizado");
+        });
+
+        ensite.on("close", code => {
+
+                console.log(`child process exited with code ${code}`);
+                bot.sendMessage(chat_id,`child process exited with code ${code}`);
+
+                bot.sendMessage(chat_id, "<!> reiniciando apache2");
+
+                let restart = spawn("service", ['apache2','restart']);
+
+                restart.stdout.on("data", data => {
+
+                        console.log(`stdout: ${data}`);
+                        bot.sendMessage(chat_id, `${data}`);
+                });
+
+                restart.on('error', (error) => {
+
+                        console.log(`stderr: ${error}`);
+                        bot.sendMessage(chat_id,`${error}`);
+                });
+
+                restart.on("close", code => {
+
+                        console.log(`child process exited with code ${code}`);
+                        bot.sendMessage(chat_id,`child process exited with code ${code}`);
+
+                        bot.sendMessage(chat_id, "<!> finalizado");
+                });
+        });
 
 }
