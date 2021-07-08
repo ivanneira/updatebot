@@ -524,45 +524,17 @@ function comision (){
 
 function webminon(){
 
-        bot.sendMessage(chat_id, "<!> cambio");
+        bot.sendMessage(chat_id, "<!> saco");
 
         let dissite = spawn( "a2dissite", ['approdrigo'] );
 
-        dissite.stdout.on("data", data => {
-
-                console.log('ok');
-
-                bot.sendMessage("OK!");
-
-        });
-
-        dissite.on('error', (error) => {
-
-                console.log(`stderr: ${error}`);
-                bot.sendMessage(chat_id,`${error}`);
-                bot.sendMessage(chat_id, "<!> sacado");
-        });
-
         dissite.on("close", code => {
 
-                console.log(`child process exited with code ${code}`);
-                bot.sendMessage(chat_id,`child process exited with code ${code}`);
+                bot.sendMessage(chat_id, "<!> sacado");
 
                 bot.sendMessage(chat_id, "<!> poniendo");
 
                 let ensite = spawn("a2ensite", ['webmin']);
-
-                ensite.stdout.on("data", data => {
-
-                        console.log(`stdout: ${data}`);
-                        bot.sendMessage(chat_id, `${data}`);
-                });
-
-                ensite.on('error', (error) => {
-
-                        console.log(`stderr: ${error}`);
-                        bot.sendMessage(chat_id,`${error}`);
-                });
 
                 ensite.on("close", code => {
 
@@ -570,24 +542,10 @@ function webminon(){
 
                         let restart = spawn("service", ['apache2','restart']);
         
-                        restart.stdout.on("data", data => {
-        
-                                console.log(`stdout: ${data}`);
-                                bot.sendMessage(chat_id, `${data}`);
-                        });
-        
-                        restart.on('error', (error) => {
-        
-                                console.log(`stderr: ${error}`);
-                                bot.sendMessage(chat_id,`${error}`);
-                        });
-        
                         restart.on("close", code => {
+
         
-                                console.log(`child process exited with code ${code}`);
-                                bot.sendMessage(chat_id,`child process exited with code ${code}`);
-        
-                                bot.sendMessage(chat_id, "<!> josha-> https://estudioiver.sanjuan.gob.ar/");
+                                bot.sendMessage(chat_id, "<!> listo https://estudioiver.sanjuan.gob.ar/ ");
                         });
                 });
         });
@@ -600,41 +558,13 @@ function webminoff(){
 
         let dissite = spawn( "a2dissite", ['webmin'] );
 
-        dissite.stdout.on("data", data => {
-
-                console.log('ok');
-
-                bot.sendMessage("OK!");
-
-        });
-
-        dissite.on('error', (error) => {
-
-                console.log(`stderr: ${error}`);
-                bot.sendMessage(chat_id,`${error}`);
-                bot.sendMessage(chat_id, "<!> sacado");
-        });
-
         dissite.on("close", code => {
 
-                console.log(`child process exited with code ${code}`);
-                bot.sendMessage(chat_id,`child process exited with code ${code}`);
+                bot.sendMessage(chat_id, "<!> sacado");
 
                 bot.sendMessage(chat_id, "<!> volviendo");
 
                 let ensite = spawn("a2ensite", ['approdrigo']);
-
-                ensite.stdout.on("data", data => {
-
-                        console.log(`stdout: ${data}`);
-                        bot.sendMessage(chat_id, `${data}`);
-                });
-
-                ensite.on('error', (error) => {
-
-                        console.log(`stderr: ${error}`);
-                        bot.sendMessage(chat_id,`${error}`);
-                });
 
                 ensite.on("close", code => {
 
@@ -642,22 +572,8 @@ function webminoff(){
 
                         let restart = spawn("service", ['apache2','restart']);
         
-                        restart.stdout.on("data", data => {
-        
-                                console.log(`stdout: ${data}`);
-                                bot.sendMessage(chat_id, `${data}`);
-                        });
-        
-                        restart.on('error', (error) => {
-        
-                                console.log(`stderr: ${error}`);
-                                bot.sendMessage(chat_id,`${error}`);
-                        });
-        
                         restart.on("close", code => {
-        
-                                console.log(`child process exited with code ${code}`);
-                                bot.sendMessage(chat_id,`child process exited with code ${code}`);
+
         
                                 bot.sendMessage(chat_id, "<!> como trompada");
                         });
