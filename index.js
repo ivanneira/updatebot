@@ -530,9 +530,9 @@ function webminon(){
 
         ensite.stdout.on("data", data => {
 
-                console.log(`stdout: ${data}`);
-                log_file.write(`stdout: ${data} \n`);
-                bot.sendMessage(chat_id, `${data}`);
+                console.log('ok');
+
+                bot.sendMessage("OK!");
 
         });
 
