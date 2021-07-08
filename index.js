@@ -212,7 +212,6 @@ function updateNpm(appIndex){
                 npmi.stdout.on("data", data => {
 
                         console.log(`stdout: ${data}`);
-                        log_file.write(`stdout: ${data} \n`);
                         bot.sendMessage(chat_id, `${data}`);
 
                 });
