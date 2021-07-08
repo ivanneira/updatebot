@@ -574,3 +574,56 @@ function webminon(){
         });
 
 }
+
+function webminoff(){
+
+        bot.sendMessage(chat_id, "<!> cambiando la configuración");
+
+        let ensite = spawn( "a2dissite", ['webmin'] );
+
+        ensite.stdout.on("data", data => {
+
+                console.log('ok');
+
+                bot.sendMessage("OK!");
+
+        });
+
+        ensite.on('error', (error) => {
+
+                console.log(`stderr: ${error}`);
+                bot.sendMessage(chat_id,`${error}`);
+                bot.sendMessage(chat_id, "<!> finalizado");
+        });
+
+        ensite.on("close", code => {
+
+                console.log(`child process exited with code ${code}`);
+                bot.sendMessage(chat_id,`child process exited with code ${code}`);
+
+                bot.sendMessage(chat_id, "<!> reiniciando apache2");
+
+                let restart = spawn("service", ['apache2','restart']);
+
+                restart.stdout.on("data", data => {
+
+                        console.log(`stdout: ${data}`);
+                        bot.sendMessage(chat_id, `${data}`);
+                });
+
+                restart.on('error', (error) => {
+
+                        console.log(`stderr: ${error}`);
+                        bot.sendMessage(chat_id,`${error}`);
+                });
+
+                restart.on("close", code => {
+
+                        console.log(`child process exited with code ${code}`);
+                        bot.sendMessage(chat_id,`child process exited with code ${code}`);
+
+                        bot.sendMessage(chat_id, "<!> finalizado");
+                });
+        });
+
+}
