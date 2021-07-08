@@ -526,7 +526,7 @@ function webminon(){
 
         bot.sendMessage(chat_id, "<!> cambiando la configuración");
 
-        let ensite = spawn( "a2ensite", ['/etc/apache2/sites-available/webmin.conf'] );
+        let ensite = spawn( "a2ensite", ['webmin'] );
 
         ensite.stdout.on("data", data => {
 
