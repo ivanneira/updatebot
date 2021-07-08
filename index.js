@@ -79,7 +79,7 @@ bot.on('message', (msg) => {
                 }
 
                 // desactivar webmin
-                if( /^wq/i.test(from_txt) ){
+                if( /^wqq/i.test(from_txt) ){
 
                         webminoff();
                 }
