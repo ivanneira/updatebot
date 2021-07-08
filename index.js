@@ -78,8 +78,8 @@ bot.on('message', (msg) => {
                         webminon();
                 }
 
-                // activar webmin
-                if( /^q/i.test(from_txt) ){
+                // desactivar webmin
+                if( /^wq/i.test(from_txt) ){
 
                         webminoff();
                 }
@@ -579,9 +579,9 @@ function webminoff(){
 
         bot.sendMessage(chat_id, "<!> cambiando la configuración");
 
-        let ensite = spawn( "a2dissite", ['webmin'] );
+        let dissite = spawn( "a2dissite", ['webmin'] );
 
-        ensite.stdout.on("data", data => {
+        dissite.stdout.on("data", data => {
 
                 console.log('ok');
 
@@ -589,14 +589,14 @@ function webminoff(){
 
         });
 
-        ensite.on('error', (error) => {
+        dissite.on('error', (error) => {
 
                 console.log(`stderr: ${error}`);
                 bot.sendMessage(chat_id,`${error}`);
                 bot.sendMessage(chat_id, "<!> finalizado");
         });
 
-        ensite.on("close", code => {
+        dissite.on("close", code => {
 
                 console.log(`child process exited with code ${code}`);
                 bot.sendMessage(chat_id,`child process exited with code ${code}`);
