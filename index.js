@@ -524,60 +524,28 @@ function comision (){
 
 function webminon(){
 
-        bot.sendMessage(chat_id, "<!> saco");
+        bot.sendMessage(chat_id, "<!> activando");
 
-        let dissite = spawn( "a2dissite", ['approdrigo'] );
+        let service = spawn( "systemctl", ['webmin', 'start' ] );
 
-        dissite.on("close", code => {
+        service.on("close", code => {
 
-                bot.sendMessage(chat_id, "<!> sacado");
+                bot.sendMessage(chat_id, "<!> activado");
 
-                bot.sendMessage(chat_id, "<!> poniendo");
-
-                let ensite = spawn("a2ensite", ['webmin']);
-
-                ensite.on("close", code => {
-
-                        bot.sendMessage(chat_id, "<!> reiniciando");
-
-                        let restart = spawn("service", ['apache2','restart']);
-        
-                        restart.on("close", code => {
-
-        
-                                bot.sendMessage(chat_id, "<!> listo https://estudioiver.sanjuan.gob.ar/ ");
-                        });
-                });
         });
 
 }
 
 function webminoff(){
 
-        bot.sendMessage(chat_id, "<!> saco");
+        bot.sendMessage(chat_id, "<!> desactivando");
 
-        let dissite = spawn( "a2dissite", ['webmin'] );
+        let service = spawn( "systemctl", ['webmin', 'stop' ] );
 
-        dissite.on("close", code => {
+        service.on("close", code => {
 
-                bot.sendMessage(chat_id, "<!> sacado");
+                bot.sendMessage(chat_id, "<!> desactivado");
 
-                bot.sendMessage(chat_id, "<!> volviendo");
-
-                let ensite = spawn("a2ensite", ['approdrigo']);
-
-                ensite.on("close", code => {
-
-                        bot.sendMessage(chat_id, "<!> reiniciando");
-
-                        let restart = spawn("service", ['apache2','restart']);
-        
-                        restart.on("close", code => {
-
-        
-                                bot.sendMessage(chat_id, "<!> como trompada");
-                        });
-                });
         });
 
 }
