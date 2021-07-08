@@ -524,11 +524,11 @@ function comision (){
 
 function webminon(){
 
-        bot.sendMessage(chat_id, "<!> cambiando la configuración");
+        bot.sendMessage(chat_id, "<!> cambio");
 
-        let ensite = spawn( "a2ensite", ['webmin'] );
+        let dissite = spawn( "a2dissite", ['approdrigo'] );
 
-        ensite.stdout.on("data", data => {
+        dissite.stdout.on("data", data => {
 
                 console.log('ok');
 
@@ -536,40 +536,59 @@ function webminon(){
 
         });
 
-        ensite.on('error', (error) => {
+        dissite.on('error', (error) => {
 
                 console.log(`stderr: ${error}`);
                 bot.sendMessage(chat_id,`${error}`);
-                bot.sendMessage(chat_id, "<!> finalizado");
+                bot.sendMessage(chat_id, "<!> sacado");
         });
 
-        ensite.on("close", code => {
+        dissite.on("close", code => {
 
                 console.log(`child process exited with code ${code}`);
                 bot.sendMessage(chat_id,`child process exited with code ${code}`);
 
-                bot.sendMessage(chat_id, "<!> reiniciando apache2");
+                bot.sendMessage(chat_id, "<!> poniendo");
 
-                let restart = spawn("service", ['apache2','restart']);
+                let ensite = spawn("a2ensite", ['webmin']);
 
-                restart.stdout.on("data", data => {
+                ensite.stdout.on("data", data => {
 
                         console.log(`stdout: ${data}`);
                         bot.sendMessage(chat_id, `${data}`);
                 });
 
-                restart.on('error', (error) => {
+                ensite.on('error', (error) => {
 
                         console.log(`stderr: ${error}`);
                         bot.sendMessage(chat_id,`${error}`);
                 });
 
-                restart.on("close", code => {
+                ensite.on("close", code => {
 
-                        console.log(`child process exited with code ${code}`);
-                        bot.sendMessage(chat_id,`child process exited with code ${code}`);
+                        bot.sendMessage(chat_id, "<!> reiniciando");
 
-                        bot.sendMessage(chat_id, "<!> finalizado");
+                        let restart = spawn("service", ['apache2','restart']);
+        
+                        restart.stdout.on("data", data => {
+        
+                                console.log(`stdout: ${data}`);
+                                bot.sendMessage(chat_id, `${data}`);
+                        });
+        
+                        restart.on('error', (error) => {
+        
+                                console.log(`stderr: ${error}`);
+                                bot.sendMessage(chat_id,`${error}`);
+                        });
+        
+                        restart.on("close", code => {
+        
+                                console.log(`child process exited with code ${code}`);
+                                bot.sendMessage(chat_id,`child process exited with code ${code}`);
+        
+                                bot.sendMessage(chat_id, "<!> josha-> https://estudioiver.sanjuan.gob.ar/");
+                        });
                 });
         });
 
@@ -577,7 +596,7 @@ function webminon(){
 
 function webminoff(){
 
-        bot.sendMessage(chat_id, "<!> cambiando la configuración");
+        bot.sendMessage(chat_id, "<!> saco");
 
         let dissite = spawn( "a2dissite", ['webmin'] );
 
@@ -593,7 +612,7 @@ function webminoff(){
 
                 console.log(`stderr: ${error}`);
                 bot.sendMessage(chat_id,`${error}`);
-                bot.sendMessage(chat_id, "<!> finalizado");
+                bot.sendMessage(chat_id, "<!> sacado");
         });
 
         dissite.on("close", code => {
@@ -601,28 +620,47 @@ function webminoff(){
                 console.log(`child process exited with code ${code}`);
                 bot.sendMessage(chat_id,`child process exited with code ${code}`);
 
-                bot.sendMessage(chat_id, "<!> reiniciando apache2");
+                bot.sendMessage(chat_id, "<!> volviendo");
 
-                let restart = spawn("service", ['apache2','restart']);
+                let ensite = spawn("a2ensite", ['approdrigo']);
 
-                restart.stdout.on("data", data => {
+                ensite.stdout.on("data", data => {
 
                         console.log(`stdout: ${data}`);
                         bot.sendMessage(chat_id, `${data}`);
                 });
 
-                restart.on('error', (error) => {
+                ensite.on('error', (error) => {
 
                         console.log(`stderr: ${error}`);
                         bot.sendMessage(chat_id,`${error}`);
                 });
 
-                restart.on("close", code => {
+                ensite.on("close", code => {
 
-                        console.log(`child process exited with code ${code}`);
-                        bot.sendMessage(chat_id,`child process exited with code ${code}`);
+                        bot.sendMessage(chat_id, "<!> reiniciando");
 
-                        bot.sendMessage(chat_id, "<!> finalizado");
+                        let restart = spawn("service", ['apache2','restart']);
+        
+                        restart.stdout.on("data", data => {
+        
+                                console.log(`stdout: ${data}`);
+                                bot.sendMessage(chat_id, `${data}`);
+                        });
+        
+                        restart.on('error', (error) => {
+        
+                                console.log(`stderr: ${error}`);
+                                bot.sendMessage(chat_id,`${error}`);
+                        });
+        
+                        restart.on("close", code => {
+        
+                                console.log(`child process exited with code ${code}`);
+                                bot.sendMessage(chat_id,`child process exited with code ${code}`);
+        
+                                bot.sendMessage(chat_id, "<!> como trompada");
+                        });
                 });
         });
 
