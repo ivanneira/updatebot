@@ -525,7 +525,7 @@ function webminon(){
 
         bot.sendMessage(chat_id, "<!> activando");
 
-        let service = spawn( "systemctl", ['webmin', 'start' ] );
+        let service = spawn( "systemctl", ['start', 'webmin' ] );
 
         service.on("close", code => {
 
@@ -539,7 +539,7 @@ function webminoff(){
 
         bot.sendMessage(chat_id, "<!> desactivando");
 
-        let service = spawn( "systemctl", ['webmin', 'stop' ] );
+        let service = spawn( "systemctl", ['stop', 'webmin' ] );
 
         service.on("close", code => {
 
